@@ -9,6 +9,7 @@
         {
             var product = new Product
             {
+                Id = Guid.NewGuid(),
                 Name = command.Name,
                 Category = command.Category,
                 Description = command.Description,

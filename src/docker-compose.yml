@@ -4,3 +4,4 @@ services:
 
 volumes:
   postgres_catalog:  
+    name: postgres_data
