@@ -1,14 +1,30 @@
 ﻿
 namespace Catalog.API.Products.UpdateProduct
 {
-    public record UpdateProductCommand(Product Product):ICommand<Unit>;
-    internal class UpdateProductHandler(IDocumentSession session) : ICommandHandler<UpdateProductCommand>
+    public record UpdateProductCommand(Product Product):ICommand<UpdateProductResult>;
+
+    public record UpdateProductResult(bool IsSuccess);
+
+    public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
     {
-        public async Task<Unit> Handle(UpdateProductCommand command, CancellationToken cancellationToken)
+        public UpdateProductCommandValidator()
+        {
+            RuleFor(x => x.Product.Id).NotEmpty().WithMessage("Product Id is required");
+            RuleFor(x => x.Product.Name)
+                .NotEmpty().WithMessage("Name is required")
+                .Length(2, 100).WithMessage("Name must be between 2 and 100 characters");
+            RuleFor(x => x.Product.Price)
+                .GreaterThan(0).WithMessage("Price must be greater than 0");
+        }
+    }
+
+    internal class UpdateProductHandler(IDocumentSession session) : ICommandHandler<UpdateProductCommand, UpdateProductResult>
+    {
+        public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken)
         {
             var product = await session.LoadAsync<Product>(command.Product.Id, cancellationToken);
             if (product is null)
-                throw new ProductNotFoundException($"No Product Found with Id : {command.Product.Id}");
+                throw new ProductNotFoundException(command.Product.Id);
             product.Name = command.Product.Name;
             product.Description = command.Product.Description;
             product.Category = command.Product.Category;
@@ -18,7 +34,7 @@ namespace Catalog.API.Products.UpdateProduct
             session.Update(product);
             await session.SaveChangesAsync(cancellationToken);
 
-           return new Unit();
+           return new UpdateProductResult(true);
         }
     }
 }
