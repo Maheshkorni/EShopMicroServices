@@ -2,7 +2,9 @@
   <Folder Name="/BuildingBlocks/">
     <Project Path="BuildingBlocks/BuildingBlocks/BuildingBlocks.csproj" Id="1106b5b3-ba1c-40c9-8fca-d999b4b0fc71" />
   </Folder>
-  <Folder Name="/Services/" />
+  <Folder Name="/Services/">
+    <Project Path="Services/Discount/Discount.GrpcService/Discount.GrpcService.csproj" Id="3de689f1-1d43-43cf-abb5-76aba489287f" />
+  </Folder>
   <Folder Name="/Services/Basket/">
     <Project Path="Services/Basket/Basket.API/Basket.API.csproj" Id="8718e3a0-d8d4-4ab3-b870-12af456230eb" />
   </Folder>
