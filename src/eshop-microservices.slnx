@@ -11,6 +11,12 @@
   <Folder Name="/Services/Catalog/">
     <Project Path="Services/Catalog/Catalog.API/Catalog.API.csproj" Id="566610e9-75eb-4fc5-8624-7292ee5ac188" />
   </Folder>
+  <Folder Name="/Services/Order/">
+    <Project Path="../Orders.Application/Orders.Application.csproj" Id="7709aa5f-a80f-4f8e-b907-82230c715eb5" />
+    <Project Path="../Orders.Infrastructure/Orders.Infrastructure.csproj" Id="43928e23-6ad3-4a15-b32b-f3238cdf5320" />
+    <Project Path="Services/Order/Oreders.Domain/Orders.Domain.csproj" Id="78d83a95-8bd3-4534-a7f9-5e3d01075300" />
+    <Project Path="Services/Order/WebApplication1/Orders.API.csproj" Id="8b738a33-6185-46f6-905f-71529e506378" />
+  </Folder>
   <Project Path="docker-compose.dcproj">
     <Build />
   </Project>
